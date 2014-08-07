@@ -12,12 +12,12 @@ public class Ping extends UntypedActor {
 
 	private int messagesSended = 0;
 
-	public Ping(ActorRef pong, Integer numberOfMessages) {
+	public Ping(ActorRef pong, int numberOfMessages) {
 		this.pong = pong;
 		this.messages = numberOfMessages;
 	}
 
-	public static Props getProps(ActorRef pong, Integer numberOfMessages) {
+	public static Props getProps(ActorRef pong, int numberOfMessages) {
 		return Props.create(Ping.class, pong, numberOfMessages);
 	}
 
@@ -25,6 +25,7 @@ public class Ping extends UntypedActor {
 	public void onReceive(Object message) throws Exception {
 
 		System.out.println("Ping! - Messages count: " + messagesSended);
+
 		if (message instanceof Protocol.Ping) {
 
 			if (messagesSended < messages) {
